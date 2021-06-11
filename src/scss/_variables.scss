@@ -1,12 +1,14 @@
 $white: #ffffff;
-$lightGrey: #f6f9fe;
 $glowBlue: #e3eaff;
+$grey100: #f6f9fe;
+$grey200: #e8e8e8;
+$grey300: #dbdbdb;
 
 $font-dir: "/fonts/";
 
 @font-face {
   font-family: "Poppins";
-  src: url("#{$font-dir}Poppins.ttf") format("truetype");
+  src: url("#{$font-dir}Poppins-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }

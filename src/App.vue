@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Rates from "./components/Rates.vue";
+import Rates from "./pages/Rates.vue";
 
 export default {
   name: "App",
@@ -22,6 +22,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: $lightGrey;
+  background-color: $grey100;
 }
 </style>
