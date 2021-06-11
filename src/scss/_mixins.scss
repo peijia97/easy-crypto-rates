@@ -1,0 +1,16 @@
+@import "./variables";
+
+// global mixins
+@mixin flexbox {
+  display: -webkit-box; // old
+  display: -moz-box; // old
+  display: -ms-flexbox; // ie
+  display: -webkit-flex; // new
+  display: flex; // new
+}
+
+@mixin box-shadow($c: #000000, $o: 0.1) {
+  -webkit-box-shadow: 0px 17px 30px 6px rgba($c, $o) !important;
+  -moz-box-shadow: 0px 17px 30px 6px rgba($c, $o) !important;
+  box-shadow: 0px 17px 30px 6px rgba($c, $o) !important;
+}

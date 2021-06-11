@@ -1,0 +1,21 @@
+$white: #ffffff;
+$lightGrey: #f6f9fe;
+$glowBlue: #e3eaff;
+
+$font-dir: "/fonts/";
+
+@font-face {
+  font-family: "Poppins";
+  src: url("#{$font-dir}Poppins.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "AktivGrotesk";
+  src: url("#{$font-dir}AktivGroteskCorp-Regular.eot");
+  src: url("#{$font-dir}AktivGroteskCorp-Regular.woff") format("woff"),
+    url("#{$font-dir}AktivGroteskCorp-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
