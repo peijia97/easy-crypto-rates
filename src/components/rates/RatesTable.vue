@@ -122,12 +122,14 @@
             label="Buy"
             class="mr-4"
             size="is-large"
+            icon="caret-up"
             @click.native="e => handleBuyOrSell(e, props.row.symbol)"
           />
           <Button
             label="Sell"
             variant="is-danger"
             size="is-large"
+            icon="caret-down"
             @click.native="e => handleBuyOrSell(e, props.row.symbol)"
           />
         </div>
@@ -233,7 +235,7 @@ export default {
   ::v-deep .star {
     color: $grey300;
     cursor: pointer;
-    margin-top: 0.4em;
+    margin-top: 0.2rem;
   }
 
   .detail-container {

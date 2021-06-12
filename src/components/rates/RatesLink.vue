@@ -22,7 +22,7 @@ export default {
 <style lang="scss" scoped>
 .link-container {
   text-align: left;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem;
   span {
     @include flexbox();
     align-items: center;

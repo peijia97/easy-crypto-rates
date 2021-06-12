@@ -2,6 +2,7 @@
   <b-button
     :rounded="rounded"
     :type="variant"
+    :icon-left="icon"
     :class="`${size === 'is-large' ? 'is-size-8' : 'is-size-7'} btn-action`"
   >
     {{ label }}
@@ -15,7 +16,8 @@ export default {
     label: { type: String, default: "", required: true },
     rounded: { type: Boolean, default: false, required: false },
     variant: { type: String, default: "is-success", required: false },
-    size: { type: String, default: "is-medium", required: false }
+    size: { type: String, default: "is-medium", required: false },
+    icon: { type: String, default: "", required: false }
   }
 };
 </script>

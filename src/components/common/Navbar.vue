@@ -60,6 +60,7 @@ export default {
   }
 
   ::v-deep .navbar-item:hover,
+  ::v-deep .navbar-item:focus,
   ::v-deep .navbar-link:hover,
   ::v-deep .navbar-link:focus,
   ::v-deep .navbar-link {

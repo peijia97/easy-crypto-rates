@@ -32,7 +32,13 @@
           :clearable="true"
         />
       </div>
-      <RatesTable :tableData="rates" :keyword="searchTerm" />
+      <SRatesTable v-if="loading && !rates.length" />
+      <RatesTable
+        v-else-if="!loading && rates.length"
+        :tableData="rates"
+        :keyword="searchTerm"
+      />
+      <p v-else>Sorry, no results were found</p>
     </div>
     <Footer />
   </div>
@@ -45,11 +51,12 @@ import Title from "@/components/common/Title.vue";
 import Header from "@/components/common/Header.vue";
 import Footer from "@/components/common/Footer.vue";
 import TextInput from "@/components/common/TextInput.vue";
+import SRatesTable from "@/components/skeleton/SRatesTable.vue";
 
 export default {
   name: "Rates",
   props: {},
-  components: { Header, TextInput, Title, RatesTable, Footer },
+  components: { Header, TextInput, Title, RatesTable, SRatesTable, Footer },
   data() {
     return { loading: true, rates: [], searchTerm: "", favCoinSearchTerm: "" };
   },

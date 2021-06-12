@@ -90,21 +90,6 @@ export default {
                 }
               }
             }
-          ],
-          xaxis: [
-            {
-              x: new Date("14 Nov 2012").getTime(),
-              borderColor: "#999",
-              yAxisIndex: 0,
-              label: {
-                show: true,
-                text: "Rally",
-                style: {
-                  color: "#fff",
-                  background: "#775DD0"
-                }
-              }
-            }
           ]
         },
         dataLabels: {
