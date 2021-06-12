@@ -14,6 +14,7 @@
     :sort-icon-size="sortIconSize"
     :mobile-cards="hasMobileCards"
     :opened-detailed="defaultOpenedRow"
+    :narrowed="isMobile"
     @click="toggleRow"
     @details-open="collapseOtherRows"
     default-sort="symbol"
@@ -44,13 +45,20 @@
       numeric
       sortable
       v-slot="props"
+      :visible="!isMobile"
     >
       {{
         props.row.sellRate ? `$${Number(props.row.sellRate).toFixed(2)}` : "—"
       }}
     </b-table-column>
 
-    <b-table-column field="rate" label="Buy" numeric sortable v-slot="props">
+    <b-table-column
+      field="rate"
+      :label="!isMobile ? 'Buy' : 'Rate'"
+      numeric
+      sortable
+      v-slot="props"
+    >
       {{ props.row.rate ? `$${Number(props.row.rate).toFixed(2)}` : "—" }}
     </b-table-column>
 
@@ -60,6 +68,7 @@
       numeric
       sortable
       v-slot="props"
+      :visible="!isMobile"
     >
       <span
         :class="
@@ -70,24 +79,28 @@
       </span>
     </b-table-column>
 
-    <b-table-column centered label="1M">
+    <b-table-column centered label="1M" :visible="!isMobile">
       <Sparkline />
     </b-table-column>
 
     <b-table-column centered v-slot="props">
-      <b-button
-        rounded
-        class="mr-4 is-success is-size-7 btn-action"
-        @click="handleBuyOrSell(props.row.symbol)"
-        >Buy / Sell</b-button
-      >
-      <b-icon
-        @click.native="e => handleFavCoin(e, props.row.symbol)"
-        :pack="isFavCoin(props.row.symbol) ? 'fas' : 'far'"
-        icon="star"
-        class="star"
-      >
-      </b-icon>
+      <span class="whitespace-nowrap">
+        <b-button
+          v-if="!isMobile"
+          rounded
+          class="mr-4 is-success is-size-7 btn-action"
+          @click="e => handleBuyOrSell(e, props.row.symbol)"
+        >
+          Buy / Sell
+        </b-button>
+        <b-icon
+          @click.native="e => handleFavCoin(e, props.row.symbol)"
+          :pack="isFavCoin(props.row.symbol) ? 'fas' : 'far'"
+          icon="star"
+          class="star"
+        >
+        </b-icon>
+      </span>
     </b-table-column>
 
     <!-- Expandable Chart -->
@@ -102,6 +115,7 @@
 
 <script>
 import { STATIC_IMG_URL } from "/src/utils/constants.js";
+import mixins from "/src/utils/mixins.js";
 import Chart from "/src/components/common/Chart.vue";
 import Sparkline from "/src/components/common/Sparkline.vue";
 
@@ -112,6 +126,7 @@ export default {
     keyword: { type: String, default: "", required: false }
   },
   components: { Chart, Sparkline },
+  mixins: [mixins],
   computed: {
     renderData() {
       return (
@@ -148,8 +163,10 @@ export default {
     isFavCoin(symbol) {
       return this.$store.getters.getFavCoins.find(c => c === symbol);
     },
-    handleBuyOrSell(symbol) {
+    handleBuyOrSell(e, symbol) {
       console.log(symbol, this.$store.getters.getFavCoins);
+      // Prevents mouse event from bubbling up (which triggers expandable chart)
+      e.stopPropagation();
     },
     handleFavCoin(e, symbol) {
       this.$store.getters.getFavCoins.find(c => c === symbol)
@@ -172,6 +189,10 @@ export default {
 .b-image-wrapper {
   width: 2rem;
   height: 2rem;
+  @include until($tablet) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .b-table {
@@ -196,12 +217,26 @@ export default {
     position: absolute;
     margin-left: 1rem;
   }
+
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+
+  @include until($tablet) {
+    width: 95%;
+    margin: auto;
+  }
 }
 
 ::v-deep .table td,
 ::v-deep .table th {
   padding: 15px 20px;
   vertical-align: middle;
+  text-align: left;
+
+  @include until($tablet) {
+    font-size: 0.85rem;
+  }
 }
 ::v-deep .table thead tr th {
   border-bottom: 1px solid $grey200;

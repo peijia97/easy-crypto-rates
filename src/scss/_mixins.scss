@@ -1,4 +1,6 @@
 @import "./variables";
+@import "~bulma/bulma.sass";
+@import "~bulma/sass/utilities/mixins";
 
 // global mixins
 @mixin flexbox {

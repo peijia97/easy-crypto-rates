@@ -7,6 +7,7 @@
     :icon-right-clickable="clearable"
     @icon-right-click="$emit('clear')"
     :placeholder="placeholder"
+    class="inputBar"
   >
   </b-input>
 </template>
@@ -23,4 +24,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.inputBar {
+  @include until($tablet) {
+    width: 95% !important;
+  }
+}
+</style>

@@ -1,9 +1,8 @@
 <template>
-  <div class="container">
-    <div v-if="favCoinsRates.length">
-      <div
-        class="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center mb-2"
-      >
+  <div>
+    <Header title="Crypto Live Rates" />
+    <div class="container">
+      <div class="section-header" v-if="favCoinsRates.length">
         <Title value="Favourite Coins" />
         <TextInput
           icon="search"
@@ -14,22 +13,25 @@
           :clearable="true"
         />
       </div>
-      <RatesTable :tableData="favCoinsRates" :keyword="favCoinSearchTerm" />
-    </div>
-    <div
-      class="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center mb-2"
-    >
-      <Title value="All Rates" />
-      <TextInput
-        icon="search"
-        placeholder="Search"
-        :value="searchTerm"
-        @input="val => (searchTerm = val)"
-        @clear="searchTerm = ''"
-        :clearable="true"
+      <RatesTable
+        v-if="favCoinsRates.length"
+        :tableData="favCoinsRates"
+        :keyword="favCoinSearchTerm"
       />
+
+      <div class="section-header">
+        <Title value="All Rates" />
+        <TextInput
+          icon="search"
+          placeholder="Search"
+          :value="searchTerm"
+          @input="val => (searchTerm = val)"
+          @clear="searchTerm = ''"
+          :clearable="true"
+        />
+      </div>
+      <RatesTable :tableData="rates" :keyword="searchTerm" />
     </div>
-    <RatesTable :tableData="rates" :keyword="searchTerm" />
   </div>
 </template>
 
@@ -37,12 +39,13 @@
 import RatesTable from "/src/components/RatesTable.vue";
 import { WS_GET_RATES } from "/src/utils/constants.js";
 import Title from "@/components/common/Title.vue";
+import Header from "@/components/common/Header.vue";
 import TextInput from "@/components/common/TextInput.vue";
 
 export default {
   name: "Rates",
   props: {},
-  components: { TextInput, Title, RatesTable },
+  components: { Header, TextInput, Title, RatesTable },
   data() {
     return { rates: [], searchTerm: "", favCoinSearchTerm: "" };
   },
@@ -63,4 +66,16 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.section-header {
+  @include flexbox();
+  margin-bottom: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @include until($tablet) {
+    flex-direction: column;
+  }
+}
+</style>
