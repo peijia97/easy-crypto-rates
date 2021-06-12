@@ -23,6 +23,7 @@
     aria-page-label="Page"
     aria-current-label="Current page"
   >
+    <!-- ICON -->
     <b-table-column field="symbol" width="40" sortable v-slot="props">
       <b-image
         :src="format(STATIC_IMG_URL, props.row.symbol)"
@@ -31,14 +32,17 @@
       ></b-image>
     </b-table-column>
 
+    <!-- NAME -->
     <b-table-column field="name" label="Name" sortable v-slot="props">
       {{ props.row.name }}
     </b-table-column>
 
+    <!-- SYMBOL -->
     <b-table-column field="symbol" label="Symbol" sortable v-slot="props">
       {{ props.row.symbol }}
     </b-table-column>
 
+    <!-- SELL RATE -->
     <b-table-column
       field="sellRate"
       label="Sell"
@@ -52,6 +56,7 @@
       }}
     </b-table-column>
 
+    <!-- BUY RATE -->
     <b-table-column
       field="rate"
       :label="!isMobile ? 'Buy' : 'Rate'"
@@ -62,6 +67,7 @@
       {{ props.row.rate ? `$${Number(props.row.rate).toFixed(2)}` : "—" }}
     </b-table-column>
 
+    <!-- WEEKLY -->
     <b-table-column
       field="weekly"
       label="Weekly"
@@ -79,20 +85,21 @@
       </span>
     </b-table-column>
 
-    <b-table-column centered label="1M" :visible="!isMobile">
+    <!-- SPARKLINE -->
+    <b-table-column centered label="Last 1M" :visible="!isMobile">
       <Sparkline />
     </b-table-column>
 
+    <!-- ACTIONS -->
     <b-table-column centered v-slot="props">
       <span class="whitespace-nowrap">
-        <b-button
-          v-if="!isMobile"
+        <Button
           rounded
-          class="mr-4 is-success is-size-7 btn-action"
-          @click="e => handleBuyOrSell(e, props.row.symbol)"
-        >
-          Buy / Sell
-        </b-button>
+          v-if="!isMobile"
+          label="Buy / Sell"
+          class="mr-4"
+          @click.native="e => handleBuyOrSell(e, props.row.symbol)"
+        />
         <b-icon
           @click.native="e => handleFavCoin(e, props.row.symbol)"
           :pack="isFavCoin(props.row.symbol) ? 'fas' : 'far'"
@@ -103,11 +110,30 @@
       </span>
     </b-table-column>
 
+    <!-- EXTRA -->
     <!-- Expandable Chart -->
     <template slot="detail" slot-scope="props">
-      <td colspan="12">
+      <td class="detail-container" colspan="12">
         <h4 class="detail-name">{{ props.row.name }}</h4>
         <Chart />
+
+        <div>
+          <Button
+            label="Buy"
+            class="mr-4"
+            size="is-large"
+            @click.native="e => handleBuyOrSell(e, props.row.symbol)"
+          />
+          <Button
+            label="Sell"
+            variant="is-danger"
+            size="is-large"
+            @click.native="e => handleBuyOrSell(e, props.row.symbol)"
+          />
+        </div>
+
+        <RatesLink title="Website:" icon="globe" :link="props.row.website" />
+        <RatesLink title="Wallet:" icon="wallet" :link="props.row.wallet" />
       </td>
     </template>
   </b-table>
@@ -118,6 +144,8 @@ import { STATIC_IMG_URL } from "/src/utils/constants.js";
 import mixins from "/src/utils/mixins.js";
 import Chart from "/src/components/common/Chart.vue";
 import Sparkline from "/src/components/common/Sparkline.vue";
+import Button from "/src/components/common/Button.vue";
+import RatesLink from "/src/components/rates/RatesLink.vue";
 
 export default {
   name: "RatesTable",
@@ -125,7 +153,7 @@ export default {
     tableData: { type: Array, default: null, required: true },
     keyword: { type: String, default: "", required: false }
   },
-  components: { Chart, Sparkline },
+  components: { Chart, Sparkline, Button, RatesLink },
   mixins: [mixins],
   computed: {
     renderData() {
@@ -207,15 +235,15 @@ export default {
     cursor: pointer;
     margin-top: 0.4em;
   }
-  .btn-action {
-    font-family: inherit;
-    padding: 1.1rem 1.8em;
-  }
 
-  .detail-name {
-    font-weight: bold;
-    position: absolute;
-    margin-left: 1rem;
+  .detail-container {
+    box-shadow: inset 0 1px 3px $grey300;
+    background: $grey400;
+    .detail-name {
+      font-weight: bold;
+      margin-left: 1rem;
+      float: left;
+    }
   }
 
   .whitespace-nowrap {

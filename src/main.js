@@ -14,7 +14,11 @@ import {
   faAngleLeft,
   faAngleRight,
   faTimes,
-  faSearch
+  faSearch,
+  faCaretDown,
+  faCaretUp,
+  faGlobe,
+  faWallet
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -32,7 +36,11 @@ library.add(
   faAngleRight,
   faTimes,
   faSearch,
-  farStar
+  farStar,
+  faCaretDown,
+  faCaretUp,
+  faGlobe,
+  faWallet
 );
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 

@@ -1,7 +1,8 @@
 <template>
   <div>
     <Header title="Crypto Live Rates" />
-    <div class="container">
+    <div class="container mb-3">
+      <!-- FAV COINS TABLE -->
       <div class="section-header" v-if="favCoinsRates.length">
         <Title value="Favourite Coins" />
         <TextInput
@@ -19,6 +20,7 @@
         :keyword="favCoinSearchTerm"
       />
 
+      <!-- ALL RATES TABLE -->
       <div class="section-header">
         <Title value="All Rates" />
         <TextInput
@@ -32,22 +34,24 @@
       </div>
       <RatesTable :tableData="rates" :keyword="searchTerm" />
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
-import RatesTable from "/src/components/RatesTable.vue";
 import { WS_GET_RATES } from "/src/utils/constants.js";
+import RatesTable from "/src/components/rates/RatesTable.vue";
 import Title from "@/components/common/Title.vue";
 import Header from "@/components/common/Header.vue";
+import Footer from "@/components/common/Footer.vue";
 import TextInput from "@/components/common/TextInput.vue";
 
 export default {
   name: "Rates",
   props: {},
-  components: { Header, TextInput, Title, RatesTable },
+  components: { Header, TextInput, Title, RatesTable, Footer },
   data() {
-    return { rates: [], searchTerm: "", favCoinSearchTerm: "" };
+    return { loading: true, rates: [], searchTerm: "", favCoinSearchTerm: "" };
   },
   computed: {
     favCoinsRates() {
@@ -60,6 +64,7 @@ export default {
     this.axios.get(WS_GET_RATES).then(res => {
       if (res.data) {
         this.rates = Object.values(res.data);
+        this.loading = false;
       }
     });
   }
@@ -69,6 +74,7 @@ export default {
 <style scoped lang="scss">
 .section-header {
   @include flexbox();
+  margin-top: 2rem;
   margin-bottom: 1rem;
   flex-direction: row;
   justify-content: space-between;

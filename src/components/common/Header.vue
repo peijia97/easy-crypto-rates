@@ -1,32 +1,47 @@
 <template>
-  <section
-    class="has-text-centered mb-6 ec-section has-wave-bottom section-purple"
-  >
+  <section class="has-text-centered ec-section has-wave-bottom section-purple">
     <div class="container">
-      <h1 class="title is-2 is-size-4-mobile has-text-white">{{ title }}</h1>
+      <Navbar />
+      <h1 class="title is-2 is-size-4-mobile has-text-white">
+        {{ title }}
+      </h1>
     </div>
     <b-image :src="require('/public/imgs/wave.svg')" alt="wave" />
   </section>
 </template>
 
 <script>
+import Navbar from "/src/components/common/Navbar.vue";
+
 export default {
   name: "Header",
-  props: { title: { type: String, default: "", required: true } }
+  props: { title: { type: String, default: "", required: true } },
+  components: { Navbar }
 };
 </script>
 
 <style lang="scss" scoped>
 .section-purple {
-  padding: 5rem 0;
   background: url(/imgs/purple.jpg) top center no-repeat #3c0e9b;
+  padding: 2rem 0 5rem;
   background-size: cover;
   position: relative;
+
+  @include until($tablet) {
+    padding: 0.5rem 0 5rem;
+  }
 
   .b-image-wrapper {
     width: 100%;
     position: absolute;
     bottom: -1px;
+  }
+
+  .title {
+    margin: 3rem 0;
+    @include until($tablet) {
+      margin: 1.5rem 0 0rem;
+    }
   }
 }
 </style>

@@ -16,3 +16,11 @@
   -moz-box-shadow: 0px 17px 30px 6px rgba($c, $o) !important;
   box-shadow: 0px 17px 30px 6px rgba($c, $o) !important;
 }
+
+@mixin ec-logo {
+  width: 15rem;
+
+  @include until($tablet) {
+    width: 10rem;
+  }
+}
