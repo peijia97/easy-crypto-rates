@@ -6,6 +6,8 @@
       >
         <Title value="Favourite Coins" />
         <TextInput
+          icon="search"
+          placeholder="Search"
           :value="favCoinSearchTerm"
           @input="val => (favCoinSearchTerm = val)"
           @clear="favCoinSearchTerm = ''"
@@ -19,6 +21,8 @@
     >
       <Title value="All Rates" />
       <TextInput
+        icon="search"
+        placeholder="Search"
         :value="searchTerm"
         @input="val => (searchTerm = val)"
         @clear="searchTerm = ''"

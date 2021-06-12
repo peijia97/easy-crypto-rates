@@ -2,9 +2,11 @@
   <b-input
     :value="value"
     @input="$emit('input', $event)"
+    :icon="icon"
     icon-right="times"
     :icon-right-clickable="clearable"
     @icon-right-click="$emit('clear')"
+    :placeholder="placeholder"
   >
   </b-input>
 </template>
@@ -14,6 +16,8 @@ export default {
   name: "TextInput",
   props: {
     value: { type: String, default: "", required: true },
+    icon: { type: String, default: "", required: false },
+    placeholder: { type: String, default: "", required: false },
     clearable: { type: Boolean, default: false, required: false }
   }
 };

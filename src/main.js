@@ -13,16 +13,27 @@ import {
   faArrowUp,
   faAngleLeft,
   faAngleRight,
-  faTimes
+  faTimes,
+  faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 // Vuex
 import { store } from "@/store/index";
+// Apex charts
+import VueApexCharts from "vue-apexcharts";
 
 Vue.config.productionTip = false;
 
-library.add(faStar, faArrowUp, faAngleLeft, faAngleRight, faTimes, farStar);
+library.add(
+  faStar,
+  faArrowUp,
+  faAngleLeft,
+  faAngleRight,
+  faTimes,
+  faSearch,
+  farStar
+);
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 
 Vue.use(Buefy, {
@@ -30,6 +41,9 @@ Vue.use(Buefy, {
   defaultIconPack: "fas"
 });
 Vue.use(VueAxios, axios);
+
+Vue.use(VueApexCharts);
+Vue.component("apexchart", VueApexCharts);
 
 new Vue({
   store,
