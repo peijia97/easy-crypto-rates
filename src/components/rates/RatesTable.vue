@@ -194,7 +194,7 @@ export default {
       return this.$store.getters.getFavCoins.find(c => c === symbol);
     },
     handleBuyOrSell(e, symbol) {
-      console.log(symbol, this.$store.getters.getFavCoins);
+      this.$emit("toggleModal", symbol);
       // Prevents mouse event from bubbling up (which triggers expandable chart)
       e.stopPropagation();
     },

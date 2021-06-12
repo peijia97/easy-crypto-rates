@@ -22,8 +22,7 @@ export default {
     skeletonCount() {
       return this.isMobile ? 4 : 7;
     }
-  },
-  props: { value: { type: String, default: "", required: true } }
+  }
 };
 </script>
 

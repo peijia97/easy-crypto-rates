@@ -15,8 +15,7 @@
 
 <script>
 export default {
-  name: "Footer",
-  props: { value: { type: String, default: "", required: true } }
+  name: "Footer"
 };
 </script>
 

@@ -18,6 +18,7 @@
         v-if="favCoinsRates.length"
         :tableData="favCoinsRates"
         :keyword="favCoinSearchTerm"
+        @toggleModal="toggleModal"
       />
 
       <!-- ALL RATES TABLE -->
@@ -32,14 +33,19 @@
           :clearable="true"
         />
       </div>
+      <!-- SKELETON -->
       <SRatesTable v-if="loading && !rates.length" />
+      <!-- DATA -->
       <RatesTable
         v-else-if="!loading && rates.length"
         :tableData="rates"
         :keyword="searchTerm"
+        @toggleModal="toggleModal"
       />
+      <!-- NO RESULTS FOUND -->
       <p v-else>Sorry, no results were found</p>
     </div>
+    <Modal :isModalActive="isModalActive" @close="toggleModal" />
     <Footer />
   </div>
 </template>
@@ -50,15 +56,30 @@ import RatesTable from "/src/components/rates/RatesTable.vue";
 import Title from "@/components/common/Title.vue";
 import Header from "@/components/common/Header.vue";
 import Footer from "@/components/common/Footer.vue";
+import Modal from "@/components/common/Modal.vue";
 import TextInput from "@/components/common/TextInput.vue";
 import SRatesTable from "@/components/skeleton/SRatesTable.vue";
 
 export default {
   name: "Rates",
   props: {},
-  components: { Header, TextInput, Title, RatesTable, SRatesTable, Footer },
+  components: {
+    Header,
+    TextInput,
+    Title,
+    Modal,
+    RatesTable,
+    SRatesTable,
+    Footer
+  },
   data() {
-    return { loading: true, rates: [], searchTerm: "", favCoinSearchTerm: "" };
+    return {
+      loading: true,
+      rates: [],
+      searchTerm: "",
+      favCoinSearchTerm: "",
+      isModalActive: false
+    };
   },
   computed: {
     favCoinsRates() {
@@ -74,6 +95,11 @@ export default {
         this.loading = false;
       }
     });
+  },
+  methods: {
+    toggleModal() {
+      this.isModalActive = !this.isModalActive;
+    }
   }
 };
 </script>

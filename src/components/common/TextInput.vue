@@ -3,7 +3,7 @@
     :value="value"
     @input="$emit('input', $event)"
     :icon="icon"
-    icon-right="times"
+    :icon-right="clearable ? 'times' : null"
     :icon-right-clickable="clearable"
     @icon-right-click="$emit('clear')"
     :placeholder="placeholder"
