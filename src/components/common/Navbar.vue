@@ -68,6 +68,10 @@ export default {
     font-weight: bold;
   }
 
+  ::v-deep .navbar-link:after {
+    border-color: $primary;
+  }
+
   @include until($desktop) {
     width: 95%;
     margin: auto;
@@ -79,6 +83,9 @@ export default {
 
   .logo {
     @include ec-logo();
+    @include until($tablet) {
+      padding-left: 0.5rem;
+    }
   }
 
   ::v-deep .navbar-dropdown {

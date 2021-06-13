@@ -9,6 +9,11 @@ import "buefy/dist/buefy.css";
 // Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn
+} from "@fortawesome/free-brands-svg-icons";
+import {
   faStar,
   faArrowUp,
   faAngleLeft,
@@ -40,7 +45,10 @@ library.add(
   faCaretDown,
   faCaretUp,
   faGlobe,
-  faWallet
+  faWallet,
+  faFacebookF,
+  faTwitter,
+  faLinkedinIn
 );
 Vue.component("vue-fontawesome", FontAwesomeIcon);
 

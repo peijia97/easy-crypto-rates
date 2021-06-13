@@ -1,3 +1,5 @@
+@import "~bulma/sass/utilities/_all";
+
 $white: #ffffff;
 $glowBlue: #e3eaff;
 $grey100: #f6f9fe;
@@ -6,6 +8,7 @@ $grey300: #dbdbdb;
 $grey400: #fafafa;
 $grey900: #303030;
 $primary: #6b2be3;
+$link: $primary;
 
 $font-dir: "/fonts/";
 

@@ -22,7 +22,8 @@ export default {
 
 <style lang="scss" scoped>
 .section-purple {
-  background: url(/imgs/purple.jpg) top center no-repeat #3c0e9b;
+  background: url(/easy-crypto-rates/imgs/purple.jpg) top center no-repeat
+    $primary;
   padding: 2rem 0 5rem;
   background-size: cover;
   position: relative;

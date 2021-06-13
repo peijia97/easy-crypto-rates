@@ -274,4 +274,9 @@ export default {
 ::v-deep .table tbody tr {
   cursor: pointer;
 }
+
+::v-deep .pagination-link.is-current {
+  background-color: $primary;
+  border-color: $primary;
+}
 </style>
