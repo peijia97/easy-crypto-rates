@@ -1,5 +1,8 @@
 # easy-crypto-rates
 
+## Demo Page
+https://peijia97.github.io/easy-crypto-rates/
+
 ## Project setup
 ```
 yarn install
